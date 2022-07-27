@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./libraries/model-viewer.min.js"></script>
+    <script src="./libraries/three.min.js"></script>
+    <script src="./libraries/GLTFLoader.js"></script>
+    <script src="./libraries/GLTFExporter.js"></script>
+    <link rel="stylesheet" href="./index.css">
+    <title>Location AR</title>
+</head>
+<body>
+    <div class="cover">
+        <button>Click to Start</button>
+    </div>
+    <model-viewer
+        alt="Location Model"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        seamless-poster
+        shadow-intensity="1"
+        camera-controls
+        skybox-image="./data/skybox.hdr"
+    ></model-viewer>
+    <script src="./index.js"></script>
+</body>
+</html>
