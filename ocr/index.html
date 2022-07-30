@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="../assets/libraries/model-viewer/model-viewer.min.js"></script>
+    <script src="../assets/libraries/threejs/three.min.js"></script>
+    <script src="../assets/libraries/threejs/TextGeometry.js"></script>
+    <script src="../assets/libraries/threejs/GLTFLoader.js"></script>
+    <script src="../assets/libraries/threejs/GLTFExporter.js"></script>
+    <script src="../assets/libraries/tesseract/tesseract.min.js"></script>
+    <link rel="stylesheet" href="./index.css">
+    <title>Optical Character Recognition</title>
+</head>
+<body>
+    <button id="starter">Start Camera</button>
+    <div id="container">
+        <video id="stream" playsinline></video>
+        <canvas id="canvas"></canvas>
+        <model-viewer
+            alt="OCR Text Model"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            seamless-poster
+            shadow-intensity="1"
+            camera-controls
+            skybox-image="../assets/images/skybox_1.hdr"
+        ></model-viewer>
+    </div>
+    <button id="shutter">Cature AR Text</button>
+    <script src="./index.js"></script>
+</body>
+</html>

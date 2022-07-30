@@ -1,0 +1,49 @@
+body {
+    margin: 0px;
+}
+
+#container > * {
+    position: absolute; 
+    right: 0; 
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto; 
+    background-size: cover;
+    overflow: hidden;
+}
+
+#stream {
+    z-index: 1;
+}
+
+#canvas {
+    z-index: 2;
+    display: none;
+}
+
+model-viewer {
+    z-index: 3;
+    display: none;
+}
+
+button {
+    width: 120px;
+    height: 30px;
+}
+
+#starter {
+    position: fixed;
+    top: calc(50vh - 15px);
+    left: calc(50vw - 60px);
+    z-index: 4;
+}
+
+#shutter {
+    position: fixed;
+    top: calc(100vh - 150px);
+    left: calc(50vw - 60px);
+    z-index: 4;
+    display: none;
+}
