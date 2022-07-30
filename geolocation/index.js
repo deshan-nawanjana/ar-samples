@@ -3,7 +3,7 @@ const getLocation = () => {
     // return promise
     return new Promise((resolve, reject) => {
         //  load locations list
-        fetch('./data/cities.json').then(x => x.json()).then(map => {
+        fetch('../assets/datasets/lk_cities.json').then(x => x.json()).then(map => {
             // get current location
             navigator.geolocation.getCurrentPosition(
                 pos => {
@@ -44,7 +44,7 @@ const loadModel = () => {
     // return new promise
     return new Promise((resolve, reject) => {
         // load model using three loader
-        new THREE.GLTFLoader().load('./data/letters.glb', resolve, () => {}, reject)
+        new THREE.GLTFLoader().load('../assets/models/letters.glb', resolve, () => {}, reject)
     })
 }
 
