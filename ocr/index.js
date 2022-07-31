@@ -11,35 +11,27 @@ const render_element = document.querySelector('model-viewer')
 // loading flag
 let loading = false
 
-// letters source model
-let source = null
-
-// load text model
-new THREE.GLTFLoader().load('../assets/models/letters.glb', model => {
-    // store model
-    source = model
-    // start button event
-    starter.addEventListener('click', () => {
-        // return if loading or loaded
-        if(loading) { return } else { loading = true }
-        // update button text
-        starter.innerHTML = 'Loading...'
-        // request user media
-        navigator.mediaDevices.getUserMedia({
-            video : { facingMode : 'environment' }
-        }).then(stream => {
-            // hide start button
-            starter.style.display = 'none'
-            // show shutter button
-            shutter.style.display = 'block'
-            // set src object to video element
-            stream_element.srcObject = stream
-        }).catch(() => {
-            // update start button text
-            starter.innerHTML = 'Start Camera'
-            // update loading flag
-            loading = false
-        })
+// start button event
+starter.addEventListener('click', () => {
+    // return if loading or loaded
+    if(loading) { return } else { loading = true }
+    // update button text
+    starter.innerHTML = 'Loading...'
+    // request user media
+    navigator.mediaDevices.getUserMedia({
+        video : { facingMode : 'environment' }
+    }).then(stream => {
+        // hide start button
+        starter.style.display = 'none'
+        // show shutter button
+        shutter.style.display = 'block'
+        // set src object to video element
+        stream_element.srcObject = stream
+    }).catch(() => {
+        // update start button text
+        starter.innerHTML = 'Start Camera'
+        // update loading flag
+        loading = false
     })
 })
 
@@ -89,7 +81,7 @@ shutter.addEventListener('click', () => {
 })
 
 // build text model method
-const buildTextModel = text => {
+const buildTextModel = (source, text) => {
     // uppercase text
     text = text.toUpperCase()
     // array for letter clones
@@ -124,19 +116,21 @@ const buildTextModel = text => {
 
 // create text method
 const createText = text => {
-    // build text model
-    const model = buildTextModel(text)
-    // export model
-    new THREE.GLTFExporter().parse(model, json => {
-        // create blob
-        const blob = new Blob([JSON.stringify(json, null, 2)], { type : 'application/json' })
-        // set blob url to model viewer
-        render_element.setAttribute('src', URL.createObjectURL(blob))
-        // show model viewer
-        render_element.style.display = 'block'
+    new THREE.GLTFLoader().load('../assets/models/letters.glb', obj => {
+        // build text model
+        const model = buildTextModel(obj, text)
+        // export model
+        new THREE.GLTFExporter().parse(model, json => {
+            // create blob
+            const blob = new Blob([JSON.stringify(json, null, 2)], { type : 'application/json' })
+            // set blob url to model viewer
+            render_element.setAttribute('src', URL.createObjectURL(blob))
+            // show model viewer
+            render_element.style.display = 'block'
+        })
+        // update shutter button text
+        shutter.innerHTML = 'Back to Camera'
+        // update state
+        state = 'model'
     })
-    // update shutter button text
-    shutter.innerHTML = 'Back to Camera'
-    // update state
-    state = 'model'
 }
